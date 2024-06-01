@@ -1,15 +1,18 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react"
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from "react"
 import styles from "./styles.module.scss"
+import { TasksContext } from "../context/TaskContent"
 
-interface Task {
-  title: string
-  done: boolean
-  id: number
-}
+// interface Task {
+//   title: string
+//   done: boolean
+//   id: number
+// }
 
 export const Tasks: React.FC = () => {
   const [taskTitle, setTaskTitle] = useState("")
-  const [tasks, setTasks] = useState([] as Task[])
+  // const [tasks, setTasks] = useState([] as Task[])
+
+  const { tasks, setTasks, handleToggleTasksStatus, /*handleRemoveTask*/ } = useContext(TasksContext)
 
 //fução disparada quando o usuário está querendo adicionar uma nova tarefa
   function handleSubmitAddTask(event: FormEvent) {
@@ -31,13 +34,6 @@ export const Tasks: React.FC = () => {
     setTaskTitle("");
   }
 
-  useEffect(() => {
-    const taskOnLocalStorage = localStorage.getItem('Tasks');
-    
-    if(taskOnLocalStorage){
-      setTasks(JSON.parse(taskOnLocalStorage));
-    }
-  }, []);
 
   return(
     <section className={styles.container}>
@@ -59,9 +55,18 @@ export const Tasks: React.FC = () => {
         {tasks.map(task => {
           return (
             <li key={task.id}>
-              <input type="checkbox" id={`task-${task.id}`} />
-              <label htmlFor={`task-${task.id}`}>{task.title}</label>
-            </li>            
+              <input 
+              type="checkbox" 
+              id={`task-${task.id}`} 
+              onChange={() => handleToggleTasksStatus(task.id)} 
+              />
+
+              <label htmlFor={`task-${task.id}`}
+              className={ task.done ? styles.done : "" }>{task.title}
+              </label>
+
+              {/* <button onClick={}>Remover Tarefa</button> */}
+            </li>     
           )
         })}
       </ul>

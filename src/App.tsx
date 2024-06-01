@@ -1,4 +1,5 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+import { TasksProvider } from './components/context/TaskContent';
 import { Header } from './components/Header/Header';
 import { Tasks } from './components/Tasks/Tasks';
 
@@ -6,7 +7,7 @@ import "./Styles/global.css"
 
 
 function App() {
-const [toggle, setToggle] = useState(false)
+// const [toggle, setToggle] = useState(false)
 
 
 // useEffect(() => {
@@ -22,12 +23,15 @@ const [toggle, setToggle] = useState(false)
 // Por padrão, o useEffect sempre será disparad após a montagem do componente: componentDidMoont
 
   return (
-    <>
+    <TasksProvider>
       <Header />
       <Tasks />
+      
 
-      <button onClick={() => setToggle(!toggle)}>toggle</button>
-    </>  
+      {/* <Memoization financialData={{ incomes: [50, 30, 20], outcomes: [5, 8, 4] }} /> */}
+      {/* <Refs /> */}
+      {/* <button onClick={() => setToggle(!toggle)}>toggle</button> */}
+    </TasksProvider>  
   )
 }
 
