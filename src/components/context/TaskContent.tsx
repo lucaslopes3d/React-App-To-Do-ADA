@@ -40,8 +40,8 @@ export const TasksProvider: React.FC<tasksProviderProps> = ({children}) => {
 
 
 //ESTUDAR DEPOIS COMO IMPLEMENTAR ESSE CÓDIGO
-  function handleRemoveTask(taskId: number) {
-    }
+  // function handleRemoveTask(taskId: number) {
+  //   }
 
 
   useEffect(() => {
